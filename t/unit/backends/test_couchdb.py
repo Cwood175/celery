@@ -126,7 +126,7 @@ class CouchSessionMock:
     _store = {}
 
     def request(self, method, url, stream=False, data=None, params=None,
-                 headers=None, **kw):
+                headers=None, **kw):
         tid = urlparse(url).path.split("/")[-1]
 
         response = Mock()
@@ -151,7 +151,7 @@ class CouchSessionMock:
             del self._store[tid]
             response.content = str_to_bytes(f'{{"ok":true,"id":"{tid}","rev":"1-revid"}}')
         else:
-            raise NotImplemented(f"CouchSessionMock.request() does not handle {method} method")
+            raise NotImplementedError(f"CouchSessionMock.request() does not handle {method} method")
 
         return response
 
